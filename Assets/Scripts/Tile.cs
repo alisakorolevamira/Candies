@@ -9,8 +9,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private Board _board;
     [SerializeField] private Image _icon;
 
-    public int X;
-    public int Y;
+    private int _x;
+    private int _y;
+
     public Tile [] Neighbours => new Tile[] { _left, _right, _top, _bottom };
     public Image Icon { get { return _icon; } }
     public Item Item
@@ -25,10 +26,10 @@ public class Tile : MonoBehaviour
 
     private Item _item;
 
-    private Tile _left => X > 0 ? _board.Tiles[X - 1, Y] : null;
-    private Tile _top => Y > 0 ? _board.Tiles[X, Y - 1] : null;
-    private Tile _right => X < _board.Width - 1 ? _board.Tiles[X + 1, Y] : null;
-    private Tile _bottom => Y < _board.Height - 1 ? _board.Tiles[X, Y + 1] : null;
+    private Tile _left => _x > 0 ? _board.Tiles[_x - 1, _y] : null;
+    private Tile _top => _y > 0 ? _board.Tiles[_x, _y - 1] : null;
+    private Tile _right => _x < _board.Width - 1 ? _board.Tiles[_x + 1, _y] : null;
+    private Tile _bottom => _y < _board.Height - 1 ? _board.Tiles[_x, _y + 1] : null;
 
     private void OnEnable()
     {
@@ -44,6 +45,12 @@ public class Tile : MonoBehaviour
     {
         _item = item;
         _icon.sprite = item.Icon;
+    }
+
+    public void SetPlace(int x, int y)
+    {
+        _x = x;
+        _y = y;
     }
 
     public List<Tile> GetConnectedTiles(List<Tile> exclude = null)

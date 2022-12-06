@@ -12,14 +12,14 @@ public class Board : MonoBehaviour
     [SerializeField] private AudioClip _collectedSound;
     [SerializeField] private AudioSource _audioSource;
 
+    private Tile _firstSelectedTile;
+    private Tile _secondSelectedTile;
+    private int _numberOfTiles = 5;
+
     public Tile[,] Tiles { get; private set; }
 
     public int Width => Tiles.GetLength(0);
     public int Height => Tiles.GetLength(1);
-
-    private Tile _firstSelectedTile;
-    private Tile _secondSelectedTile;
-    private int _numberOfTiles = 5;
 
     private void Start()
     {
@@ -30,8 +30,7 @@ public class Board : MonoBehaviour
             for (int j = 0; j < Width; j++)
             {
                 var tile = _rows[i].Tiles[j];
-                tile.X = j;
-                tile.Y = i;
+                tile.SetPlace(j, i);
 
                 var newItem = _database.Items[Random.Range(0, _database.Items.Length - 1)];
 

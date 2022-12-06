@@ -5,5 +5,6 @@ using UnityEngine;
 public class Row : MonoBehaviour
 {
     [SerializeField] private Tile[] _tiles;
+
     public Tile[] Tiles { get { return _tiles; } }
 }
